@@ -12,7 +12,7 @@ import lombok.*;
 @Entity
 public class Images {
     @Id
-    private String id;
+    private String imageId;
 
     @Embedded
     private FileResource fileResource;
