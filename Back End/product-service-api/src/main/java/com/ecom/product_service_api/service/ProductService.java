@@ -6,7 +6,7 @@ import com.ecom.product_service_api.dto.response.paginate.ResponseProductPaginat
 import org.springframework.web.multipart.MultipartFile;
 
 public interface ProductService {
-    public void createProduct(RequestProductDto productDto);
+    public void createProduct(RequestProductDto productDto, MultipartFile file);
     public void updateProduct(RequestProductDto productDto , String productId);
     public void deleteProduct(String productId);
     public ResponseProductDto findProductById(String productId);

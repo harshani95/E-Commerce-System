@@ -16,7 +16,7 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepo productRepo;
 
     @Override
-    public void createProduct(RequestProductDto productDto) {
+    public void createProduct(RequestProductDto productDto, MultipartFile file) {
 
     }
 
