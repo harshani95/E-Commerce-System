@@ -20,12 +20,13 @@ const OrderSchema = new mongoose.Schema({
     type: Object,
     required: true,
   },
+  
   orderPayment: {
     type: Object,
     required: true,
   },
   
-    orderStatus: {
+  status: {
     type: String,
     required: true,
   },
