@@ -3,6 +3,7 @@ package com.ecom.product_service_api.controller;
 import com.ecom.product_service_api.dto.request.RequestProductDto;
 import com.ecom.product_service_api.dto.response.ResponseProductDto;
 import com.ecom.product_service_api.dto.response.paginate.ResponseProductPaginate;
+import com.ecom.product_service_api.entity.Product;
 import com.ecom.product_service_api.service.ProductService;
 import com.ecom.product_service_api.util.StandardResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -55,9 +56,9 @@ public class ProductController {
 
     @GetMapping("/find-by-id/{productId}")
     public ResponseEntity<StandardResponse> findProductById(@PathVariable String productId){
-
+         ResponseProductDto responseProductDto = productService.findProductById(productId);
         return new ResponseEntity<>(
-                new StandardResponse(200,"productService.findProductById(productId)","Product Data.."),
+                new StandardResponse(200,responseProductDto,"Product Data.."),
                 HttpStatus.OK
         );
     }
@@ -65,14 +66,33 @@ public class ProductController {
     @GetMapping("/search-all-products")
     public ResponseEntity<StandardResponse> searchAllProducts(
             @RequestParam String searchText, @RequestParam int page, @RequestParam int size ){
-
+        ResponseProductPaginate responseProductPaginate= productService.searchAllProducts(searchText,page,size);
             return new ResponseEntity<>(
-                    new StandardResponse(200,"productService.searchAllProducts(searchText,page,size)","Product List.."),
+                    new StandardResponse(200,responseProductPaginate,"Product List.."),
                     HttpStatus.OK
             );
     }
 
-    public void updateImage(MultipartFile file, String imageId);
-    public void deleteImage(String imageId);
+    @PutMapping("/update-image/{imageId}")
+    public ResponseEntity<StandardResponse> updateImage(
+            @RequestParam("image") MultipartFile file,
+            @PathVariable String imageId
+
+    ) {
+        productService.updateImage(file,imageId );
+        return new ResponseEntity<>(
+                new StandardResponse(201, null, "image updated.."),
+                HttpStatus.CREATED
+        );
+    }
+
+    @DeleteMapping("/delete-image-by-id/{imageId}")
+    public ResponseEntity<StandardResponse> deleteImage(@PathVariable String imageId) {
+        productService.deleteImage(imageId);
+        return new ResponseEntity<>(
+                new StandardResponse(204, null, "image deleted.."),
+                HttpStatus.NO_CONTENT
+        );
+    }
 
 }
