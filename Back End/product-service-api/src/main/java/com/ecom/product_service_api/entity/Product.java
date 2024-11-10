@@ -9,6 +9,7 @@ import java.util.Set;
 @Getter
 @Setter
 @ToString
+@Builder
 @Entity
 public class Product {
     @Id
