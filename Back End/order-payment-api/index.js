@@ -9,7 +9,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use("/order", OrderRoute);
+app.use("/order-payment-service/api/v1", OrderRoute);
 
 // Eureka client configuration
 const client = new Eureka({
